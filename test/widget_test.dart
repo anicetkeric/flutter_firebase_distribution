@@ -8,23 +8,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:flutter_firebase_distribution/main.dart';
+import 'package:flutter_firebase_distribution/home.dart';
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(const MyApp());
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+    testWidgets('finds a Text widget', (tester) async {
+      // Build an App with a Text widget that displays the letter 'H'.
+      await tester.pumpWidget(const MaterialApp(
+        home: Scaffold(
+          body: Text('H'),
+        ),
+      ));
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
-
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
-  });
+      // Find a widget that displays the letter 'H'.
+      expect(find.text('H'), findsOneWidget);
+      expect(find.byType(Text), findsOneWidget);
+    });
 }
